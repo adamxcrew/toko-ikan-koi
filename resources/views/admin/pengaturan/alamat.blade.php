@@ -18,8 +18,7 @@
               <div class="col-12 grid-margin">
                 <div class="card">
                   <div class="card-body">
-                   
-                    @if($cekalamat < 1)
+                    @if($cekalamat <= 0)
                     <div class="row">
                         <div class="col-md-12">
                             <form action="{{ route('admin.pengaturan.simpanalamat') }}" method="POST">
@@ -27,8 +26,8 @@
                                 <div class="form-group">
                                 <label>Provinsi</label>
                                 <select required name="province_id" id="province_id" class="form-control">
-                                    @foreach($provinces as $province)
-                                        <option value="{{ $province->province_id }}">{{ $province->title }}</option>
+                                    @foreach($provinsi as $province)
+                                        <option value="{{ $province->provinsi_id }}">{{ $province->nama }}</option>
                                     @endforeach
                                 </select>
                                 </div>
@@ -47,9 +46,10 @@
                             </form>
                         </div>
                     </div>
-                    @endif
+                    @else
                     <div class="row">
                         <div class="col-md-12">
+
                             <table>
                                 <tr>
                                     <th>Alamat Sekarang</th>
@@ -57,9 +57,11 @@
                                     <td>{{ $alamat->detail }} , {{ $alamat->kota }} , {{ $alamat->prov }}</td>
                                 </tr>
                             </table>
+
                               <small><a href="{{ route('admin.pengaturan.ubahalamat',['id' =>  $alamat->id]) }}">Klik untuk mengubah alamat toko</a></small>
                         </div>
                     </div>
+                    @endif
                   </div>
                 </div>
               </div>
@@ -86,7 +88,7 @@ var toHtml = (tag, value) => {
             if(data.length > 0) {
 			var i = 0;
 			for(i = 0; i < data.length; i++) {
-				op += `<option value="${data[i].city_id}">${data[i].title}</option>`
+				op += `<option value="${data[i].kota_id}">${data[i].nama}</option>`
 			}
 		    }
             toHtml('[name="cities_id"]', op);

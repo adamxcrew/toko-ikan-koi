@@ -19,19 +19,19 @@ class OrderController extends Controller
 
         $order = DB::table('order')
                     ->join('status_order','status_order.id','=','order.status_order_id')
-                    ->select('order.*','status_order.name')
+                    ->select('order.*','status_order.nama')
                     ->where('order.status_order_id',1)
                     ->where('order.user_id',$user_id)->get();
         $dicek = DB::table('order')
                     ->join('status_order','status_order.id','=','order.status_order_id')
-                    ->select('order.*','status_order.name')
+                    ->select('order.*','status_order.nama')
                     ->where('order.status_order_id','!=',1)
                     ->Where('order.status_order_id','!=',5)
                     ->Where('order.status_order_id','!=',6)
                     ->where('order.user_id',$user_id)->get();
         $histori = DB::table('order')
         ->join('status_order','status_order.id','=','order.status_order_id')
-        ->select('order.*','status_order.name')
+        ->select('order.*','status_order.nama')
         ->where('order.status_order_id','!=',1)
         ->Where('order.status_order_id','!=',2)
         ->Where('order.status_order_id','!=',3)
@@ -49,17 +49,17 @@ class OrderController extends Controller
     {
         //function menampilkan detail order
         $detail_order = DB::table('detail_order')
-        ->join('products','products.id','=','detail_order.product_id')
+        ->join('produk','produk.id','=','detail_order.produk_id')
         ->join('order','order.id','=','detail_order.order_id')
-        ->select('products.name as nama_produk','products.image','detail_order.*','products.price','order.*')
+        ->select('produk.nama as nama_produk','produk.gambar','detail_order.*','produk.harga','order.*')
         ->where('detail_order.order_id',$id)
         ->get();
 
-        
+
         $order = DB::table('order')
         ->join('users','users.id','=','order.user_id')
         ->join('status_order','status_order.id','=','order.status_order_id')
-        ->select('order.*','users.name as nama_pelanggan','status_order.name as status')
+        ->select('order.*','users.name as nama_pelanggan','status_order.nama as status')
         ->where('order.id',$id)
         ->first();
         $data = array(
@@ -90,7 +90,7 @@ class OrderController extends Controller
         }
         return redirect()->route('user.order');
     }
-    
+
     public function pembayaran($id)
     {
         //menampilkan view pembayaran
@@ -157,14 +157,14 @@ class OrderController extends Controller
         }
 
         $order = DB::table('order')->where('invoice',$request->invoice)->first();
-        
+
         $barang = DB::table('keranjang')->where('user_id',$userid)->get();
         //lalu masukan barang2 yang dibeli ke table detail order
         foreach($barang as $brg){
             Detailorder::create([
                 'order_id' => $order->id,
-                'product_id' => $brg->products_id,
-                'qty' => $brg->qty,
+                'produk_id' => $brg->produk_id,
+                'jumlah' => $brg->jumlah,
             ]);
         }
         //lalu hapus data produk pada keranjang pembeli

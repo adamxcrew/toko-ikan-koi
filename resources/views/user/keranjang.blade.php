@@ -26,22 +26,22 @@
             </thead>
             <tbody>
                 <tr>
-                    
+
                 <?php $subtotal=0; foreach($keranjangs as $keranjang): ?>
                 <td class="product-thumbnail">
-                    <img src="{{ asset('storage/'.$keranjang->image) }}" alt="Image" class="img-fluid" width="150">
+                    <img src="{{ asset('storage/'.$keranjang->gambar) }}" alt="Image" class="img-fluid" width="150">
                 </td>
                 <td class="product-name">
                     <h2 class="h5 text-black">{{ $keranjang->nama_produk }}</h2>
                 </td>
-                <td>Rp. {{ number_format($keranjang->price,2,',','.') }} </td>
+                <td>Rp. {{ number_format($keranjang->harga,2,',','.') }} </td>
                 <td>
                     <div class="input-group mb-3" style="max-width: 120px;">
                     <div class="input-group-prepend">
                         <button class="btn btn-outline-primary js-btn-minus" type="button">&minus;</button>
                     </div>
                     <input type="hidden" name="id[]" value="{{ $keranjang->id }}">
-                    <input type="text" name="qty[]" class="form-control text-center" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="{{ $keranjang->qty }}">
+                    <input type="text" name="jumlah[]" class="form-control text-center" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="{{ $keranjang->jumlah }}">
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary js-btn-plus" type="button">&plus;</button>
                     </div>
@@ -49,7 +49,7 @@
 
                 </td>
                 <?php
-                    $total = $keranjang->price * $keranjang->qty;
+                    $total = $keranjang->harga * $keranjang->jumlah;
                     $subtotal = $subtotal + $total;
                 ?>
                 <td>Rp. {{ number_format($total,2,',','.') }}</td>
@@ -58,7 +58,7 @@
                 <?php endforeach;?>
             </tbody>
             </table>
-        
+
     </div>
 
     <div class="row">
@@ -67,7 +67,7 @@
             <div class="col-md-6 mb-3 mb-md-0">
             <button type="submit" class="btn btn-primary btn-sm btn-block">Update Keranjang</button>
             </div>
-            </form>       
+            </form>
         </div>
         </div>
         <div class="col-md-6 pl-5">

@@ -13,12 +13,12 @@ class ProductController extends Controller
     public function index()
     {
         //membawa data produk yang di join dengan table kategori
-        $products = DB::table('products')
-                    ->join('categories', 'categories.id', '=', 'products.categories_id')
-                    ->select('products.*', 'categories.name as nama_kategori')
+        $produk = DB::table('produk')
+                    ->join('kategori', 'kategori.id', '=', 'produk.kategori_id')
+                    ->select('produk.*', 'kategori.nama as nama_kategori')
                     ->get();
         $data = array(
-            'products' => $products
+            'produk' => $produk
         );
         return view('admin.product.index',$data);
     }
@@ -39,16 +39,16 @@ class ProductController extends Controller
         if($request->file('image')){
             //simpan foto produk yang di upload ke direkteri public/storage/imageproduct
             $file = $request->file('image')->store('imageproduct','public');
-            
+
             Product::create([
-                'name' => $request->name,
-                'description' => $request->description,
-                'price' => $request->price,
+                'nama' => $request->name,
+                'deskripsi' => $request->description,
+                'harga' => $request->price,
                 'stok' => $request->stok,
                 'weigth' => $request->weigth,
-                'categories_id' => $request->categories_id,
+                'kategori_id' => $request->categories_id,
 
-                'image'          => $file
+                'gambar'          => $file
 
             ]);
 
@@ -74,20 +74,20 @@ class ProductController extends Controller
 
         // Lalu update data nya ke database
         if( $request->file('image')){
-            
+
             Storage::delete('public/'.$prod->image);
             $file = $request->file('image')->store('imageproduct','public');
-            $prod->image = $file;
+            $prod->gambar = $file;
         }
 
-        $prod->name = $request->name;
-        $prod->description = $request->description;
-        $prod->price = $request->price;
+        $prod->nama = $request->name;
+        $prod->deskripsi = $request->description;
+        $prod->harga = $request->price;
         $prod->weigth = $request->weigth;
-        $prod->categories_id = $request->categories_id;
+        $prod->kategori_id = $request->categories_id;
         $prod->stok = $request->stok;
-        
-        
+
+
         $prod->save();
 
         return redirect()->route('admin.product')->with('status','Berhasil Mengubah Kategori');
@@ -98,7 +98,7 @@ class ProductController extends Controller
         //mengahapus produk
         $prod = Product::findOrFail($id);
         Product::destroy($id);
-        Storage::delete('public/'.$prod->image);
+        Storage::delete('public/'.$prod->gambar);
         return redirect()->route('admin.product')->with('status','Berhasil Mengahapus Produk');
     }
 }

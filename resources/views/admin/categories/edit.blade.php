@@ -32,7 +32,7 @@
                                 @csrf
                                 <div class="form-group">
                                 <label for="exampleInputUsername1">Nama Kategori</label>
-                                <input type="text" class="form-control" name="name" value="{{ $categorie->name }}">
+                                <input type="text" class="form-control" name="name" value="{{ $categorie->nama }}">
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-success text-right">Simpan</button>
@@ -45,5 +45,5 @@
               </div>
             </div>
           </div>
-          
+
 @endsection

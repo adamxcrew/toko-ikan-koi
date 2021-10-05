@@ -64,12 +64,12 @@
             <div class="block-4 text-center">
                 <a href="{{ route('user.produk.detail',['id' =>  $produk->id]) }}">
                 <figure class="block-4-image">
-                <img src="{{ asset('storage/'.$produk->image) }}" alt="Image placeholder" class="img-fluid" width="100%" style="height:300px">
+                <img src="{{ asset('storage/'.$produk->gambar) }}" alt="Image placeholder" class="img-fluid" width="100%" style="height:300px">
                 </figure>
                 </a>
                 <div class="block-4-text p-4">
-                <h3><a href="{{ route('user.produk.detail',['id' =>  $produk->id]) }}">{{ $produk->name }}</a></h3>
-                <p class="mb-0">{{ $produk->price }}</p>
+                <h3><a href="{{ route('user.produk.detail',['id' =>  $produk->id]) }}">{{ $produk->nama }}</a></h3>
+                <p class="mb-0">{{ $produk->harga }}</p>
                 <a href="{{ route('user.produk.detail',['id' =>  $produk->id]) }}" class="btn btn-primary mt-2">Detail</a>
                 </div>
             </div>

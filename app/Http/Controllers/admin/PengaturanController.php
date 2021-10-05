@@ -15,40 +15,45 @@ class PengaturanController extends Controller
         $cek = DB::table('alamat_toko')->count();
         $data['cekalamat'] = $cek;
         //jika belum di setting maka ambil data provinsi untuk di tampilkan di form alamat
-        if($cek < 1){
-            $data['provinces'] = Province::all();
+        if($cek <= 0){
+            $data['provinsi'] = Province::all();
         }else{
             //jika sudah di setting maka tidak menampilkan form tapi tampilkan data alamat toko
             $data['alamat'] = DB::table('alamat_toko')
-                                    ->join('cities','cities.city_id','=','alamat_toko.city_id')
-                                    ->join('provinces','provinces.province_id','=','cities.province_id')
-                                    ->select('alamat_toko.*','cities.title as kota','provinces.title as prov')->first();
+                                    ->join('kota','kota.kota_id','=','alamat_toko.kota_id')
+                                    ->join('provinsi','provinsi.provinsi_id','=','kota.provinsi_id')
+                                    ->select('alamat_toko.*','kota.nama as kota','provinsi.nama as prov')->first();
+
+                                    // dd($data);
+
         }
+        // dd($data);
         return view('admin.pengaturan.alamat',$data);
+
     }
     public function getCity($id)
     {
 
         //kfunction untuk mengambil data kota sesuia id parameter
-        $city = City::where('province_id',$id)->get();
+        $city = City::where('provinsi_id',$id)->get();
         //lalu return dengan format json
-        return response()->json($city); 
+        return response()->json($city);
     }
 
     public function ubahalamat($id)
     {
         //function untuk menampilkan form edit alamat
-        $data['provinces'] = Province::all();
+        $data['provinsi'] = Province::all();
         $data['id'] = $id;
         return view('admin.pengaturan.ubahalamat',$data);
     }
-    
+
     public function simpanalamat(Request $request)
     {
         //menyimpan alamat baru pada toko
 
         DB::table('alamat_toko')->insert([
-            'city_id' => $request->cities_id,
+            'kota_id' => $request->cities_id,
             'detail'  => $request->detail
         ]);
 
@@ -62,7 +67,7 @@ class PengaturanController extends Controller
         DB::table('alamat_toko')
             ->where('id',$id)
             ->update([
-            'city_id' => $request->cities_id,
+            'kota_id' => $request->cities_id,
             'detail'  => $request->detail
         ]);
 

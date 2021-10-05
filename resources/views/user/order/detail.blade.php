@@ -17,7 +17,7 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="card">  
+            <div class="card">
                 <div class="card-body">
                 <div class="row">
                 <div class="col-md-8">
@@ -76,21 +76,21 @@
                         <tbody>
                             @foreach($detail as $o)
                             <tr>
-                                <td><img src="{{ asset('storage/'.$o->image) }}" alt="" srcset="" width="50"></td>
+                                <td><img src="{{ asset('storage/'.$o->gambar) }}" alt="" srcset="" width="50"></td>
                                 <td>{{ $o->nama_produk }}</td>
-                                <td>{{ $o->qty }}</td>
-                                <td>{{ $o->qty * $o->price }}</td>
+                                <td>{{ $o->jumlah }}</td>
+                                <td>{{ $o->jumlah * $o->harga }}</td>
                             </tr>
                             @endforeach
                         </tbody>
                         </table>
-                    
+
                 </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 
     </div>
 </div>

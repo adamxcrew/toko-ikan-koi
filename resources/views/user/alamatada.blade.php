@@ -45,7 +45,7 @@ var toHtml = (tag, value) => {
     //  $('#cities_id').select2();
      $('#province_id').on('change',function(){
      var id = $('#province_id').val();
-     var url = window.location.href + '/getcity/' + id;   
+     var url = window.location.href + '/getcity/' + id;
      $.ajax({
          type:'GET',
          url:url,
@@ -55,7 +55,7 @@ var toHtml = (tag, value) => {
             if(data.length > 0) {
 			var i = 0;
 			for(i = 0; i < data.length; i++) {
-				op += `<option value="${data[i].city_id}">${data[i].title}</option>`
+				op += `<option value="${data[i].kota_id}">${data[i].nama}</option>`
 			}
 		    }
             toHtml('[name="cities_id"]', op);

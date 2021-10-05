@@ -38,7 +38,7 @@
                                     <label for="exampleFormControlSelect2">Pilih Kategori</label>
                                     <select class="form-control" name="categories_id" id="exampleFormControlSelect2">
                                     @foreach($categories as $categorie)
-                                        <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
+                                        <option value="{{ $categorie->id }}">{{ $categorie->nama }}</option>
                                     @endforeach
                                     </select>
                                 </div>
@@ -74,5 +74,5 @@
               </div>
             </div>
           </div>
-          
+
 @endsection

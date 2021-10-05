@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $order_terbaru = $order = DB::table('order')
                         ->join('status_order','status_order.id','=','order.status_order_id')
                         ->join('users','users.id','=','order.user_id')
-                        ->select('order.*','status_order.name','users.name as nama_pemesan')
+                        ->select('order.*','status_order.nama','users.name as nama_pemesan')
                         ->limit(10)
                         ->get();
         $data = array(
@@ -33,7 +33,7 @@ class DashboardController extends Controller
             'pelanggan'  => $pelanggan,
             'order_baru' => $order_terbaru
         );
-        
+
         return view('admin/dashboard',$data);
     }
 }

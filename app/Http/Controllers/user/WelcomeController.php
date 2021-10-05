@@ -13,7 +13,7 @@ class WelcomeController extends Controller
         //menampilkan data produk dihalamam utama user dengan limit 10 data
         //untuk di carousel
         $data = array(
-            'produks' => DB::table('products')->limit(10)->get(),
+            'produks' => DB::table('produk')->limit(10)->get(),
         );
         return view('user.welcome',$data);
     }

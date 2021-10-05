@@ -11,12 +11,12 @@ class KeranjangController extends Controller
 
     public function index()
     {
-        
+
         $id_user = \Auth::user()->id;
         $keranjangs = DB::table('keranjang')
                             ->join('users','users.id','=','keranjang.user_id')
-                            ->join('products','products.id','=','keranjang.products_id')
-                            ->select('products.name as nama_produk','products.image','users.name','keranjang.*','products.price')
+                            ->join('produk','produk.id','=','keranjang.produk_id')
+                            ->select('produk.nama as nama_produk','produk.gambar','users.name','keranjang.*','produk.harga')
                             ->where('keranjang.user_id','=',$id_user)
                             ->get();
         $cekalamat = DB::table('alamat')->where('user_id',$id_user)->count();
@@ -31,8 +31,8 @@ class KeranjangController extends Controller
     {
         Keranjang::create([
             'user_id' => $request->user_id,
-            'products_id' => $request->products_id,
-            'qty' => $request->qty
+            'produk_id' => $request->produk_id,
+            'jumlah' => $request->jumlah
         ]);
 
         return redirect()->route('user.keranjang');
@@ -47,11 +47,11 @@ class KeranjangController extends Controller
         $index = 0;
         foreach($request->id as $id){
             $keranjang = Keranjang::findOrFail($id);
-            $keranjang->qty = $request->qty[$index];
+            $keranjang->jumlah = $request->jumlah[$index];
             $keranjang->save();
             $index++;
         }
-        
+
         return redirect()->route('user.keranjang');
     }
 
@@ -59,7 +59,7 @@ class KeranjangController extends Controller
     {
 
         Keranjang::destroy($id);
-        
+
         return redirect()->route('user.keranjang');
     }
 }

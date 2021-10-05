@@ -13,10 +13,10 @@ class CreateCouriersTable extends Migration
      */
     public function up()
     {
-        Schema::create('couriers', function (Blueprint $table) {
+        Schema::create('kurir', function (Blueprint $table) {
             $table->id();
-            $table->string('code');
-            $table->string('title');
+            $table->string('kode');
+            $table->string('nama');
             $table->timestamps();
         });
     }

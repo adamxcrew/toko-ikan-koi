@@ -39,7 +39,7 @@
                           @foreach($categories as $categorie)
                             <tr>
                                 <td align="center"></td>
-                                <td>{{ $categorie->name }}</td>
+                                <td>{{ $categorie->nama }}</td>
                                 <td align="center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                   <a href="{{ route('admin.categories.edit',['id'=>$categorie->id]) }}" class="btn btn-warning btn-sm">
@@ -60,5 +60,5 @@
               </div>
             </div>
           </div>
-          
+
 @endsection

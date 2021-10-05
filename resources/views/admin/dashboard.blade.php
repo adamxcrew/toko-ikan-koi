@@ -68,7 +68,7 @@
                               <td>{{ $order->invoice }}</td>
                               <td>{{ $order->nama_pemesan }}</td>
                               <td>{{ $order->subtotal + $order->biaya_cod }}</td>
-                              <td>{{ $order->name }}</td>
+                              <td>{{ $order->nama }}</td>
                               <td> <a href="{{ route('admin.transaksi.detail',['id'=>$order->id]) }}" class="btn btn-warning btn-sm">Detail</a></td>
                             </tr>
                           @endforeach

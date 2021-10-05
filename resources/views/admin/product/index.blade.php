@@ -41,15 +41,15 @@
                           </tr>
                         </thead>
                         <tbody>
-                          @foreach($products as $product)
+                          @foreach($produk as $product)
                             <tr>
                                 <td align="center"></td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ $product->price }}</td>
+                                <td>{{ $product->nama }}</td>
+                                <td>{{ $product->harga }}</td>
                                 <td>{{ $product->weigth }}gr</td>
                                 <td>{{ $product->nama_kategori }}</td>
                                 <td>{{ $product->stok }}</td>
-                                <td><img src="{{ asset('storage/'.$product->image) }}" alt="" ></td>
+                                <td><img src="{{ asset('storage/'.$product->gambar) }}" alt="" ></td>
                                 <td align="center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                   <a href="{{ route('admin.product.edit',['id'=>$product->id]) }}" class="btn btn-warning btn-sm">
@@ -70,5 +70,5 @@
               </div>
             </div>
           </div>
-          
+
 @endsection

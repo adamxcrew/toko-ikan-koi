@@ -22,17 +22,19 @@ class AlamatController extends Controller
         //cek jika user sudah mengatur alamat maka jalankan ini
         if($cekAlamat >0){
             $data['alamat'] = DB::table('alamat')
-            ->join('cities','cities.city_id','=','alamat.cities_id')
-            ->join('provinces','provinces.province_id','=','cities.province_id')
-            ->select('provinces.title as prov','cities.title as kota','alamat.*')
+            ->join('kota','kota.kota_id','=','alamat.kota_id')
+            ->join('provinsi','provinsi.provinsi_id','=','kota.provinsi_id')
+            ->select('provinsi.nama as prov','kota.nama as kota','alamat.*')
             ->where('alamat.user_id',$id_user)
             ->get();
-            return view('user.alamatada',$data);               
+
+            // dd($data);
+            return view('user.alamatada',$data);
         }else{
             //jika belum maka tampilkan form untuk mengatur alamat
-            return view('user.alamat',$data);            
+            return view('user.alamat',$data);
         }
-        
+
     }
 
     public function ubah($id)
@@ -40,7 +42,7 @@ class AlamatController extends Controller
         //menampilkan form edit alamat
         $data['province'] = Province::all();
         $data['id'] = $id;
-        return view('user.ubahalamat',$data); 
+        return view('user.ubahalamat',$data);
     }
 
     public function update($id,Request $request)
@@ -57,18 +59,18 @@ class AlamatController extends Controller
     public function getCity($id)
     {
         //mengambil data kota/kab
-        $city = City::where('province_id',$id)->get();
-        return response()->json($city); 
+        $city = City::where('provinsi_id',$id)->get();
+        return response()->json($city);
     }
     public function simpan(Request $request)
     {
         //menyimpan alamat user
         Alamat::create([
-            'cities_id' => $request->cities_id,
+            'kota_id' => $request->cities_id,
             'detail'    => $request->detail,
             'user_id'   => \Auth::user()->id
         ]);
-        
+
         return redirect()->route('user.alamat');
     }
 }

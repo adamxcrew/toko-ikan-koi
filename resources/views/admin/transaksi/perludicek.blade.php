@@ -44,7 +44,7 @@
                                 <td>{{ $order->nama_pemesan }}</td>
                                 <td>{{ $order->subtotal + $order->biaya_cod }}</td>
                                 <td>{{ $order->metode_pembayaran }}</td>
-                                <td>{{ $order->name }}</td>
+                                <td>{{ $order->nama }}</td>
                                 <td align="center">
                                 <div class="btn-group" role="group" aria-label="Basic example">
                                   <a href="{{ route('admin.transaksi.detail',['id'=>$order->id]) }}" class="btn btn-warning btn-sm">
@@ -62,5 +62,5 @@
               </div>
             </div>
           </div>
-          
+
 @endsection

@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class City extends Model
 {
-    protected $table = 'cities';
+    protected $table = 'kota';
     protected $fillable = [
-        'province_id', 'city_id','title'
+        'provinsi_id', 'kota_id','nama'
     ];
 }

@@ -14,7 +14,7 @@ class TransaksiController extends Controller
         $order = DB::table('order')
                     ->join('status_order','status_order.id','=','order.status_order_id')
                     ->join('users','users.id','=','order.user_id')
-                    ->select('order.*','status_order.name','users.name as nama_pemesan')
+                    ->select('order.*','status_order.nama','users.name as nama_pemesan')
                     ->where('order.status_order_id',1)
                     ->get();
         $data = array(
@@ -28,15 +28,15 @@ class TransaksiController extends Controller
     {
         //ambil data detail order sesuai id
         $detail_order = DB::table('detail_order')
-                            ->join('products','products.id','=','detail_order.product_id')
+                            ->join('produk','produk.id','=','detail_order.produk_id')
                             ->join('order','order.id','=','detail_order.order_id')
-                            ->select('products.name as nama_produk','products.image','detail_order.*','products.price','order.*')
+                            ->select('produk.nama as nama_produk','produk.gambar','detail_order.*','produk.harga','order.*')
                             ->where('detail_order.order_id',$id)
                             ->get();
         $order = DB::table('order')
                     ->join('users','users.id','=','order.user_id')
                     ->join('status_order','status_order.id','=','order.status_order_id')
-                    ->select('order.*','users.name as nama_pelanggan','status_order.name as status')
+                    ->select('order.*','users.name as nama_pelanggan','status_order.nama as status')
                     ->where('order.id',$id)
                     ->first();
         $data = array(
@@ -52,7 +52,7 @@ class TransaksiController extends Controller
         $order = DB::table('order')
                     ->join('status_order','status_order.id','=','order.status_order_id')
                     ->join('users','users.id','=','order.user_id')
-                    ->select('order.*','status_order.name','users.name as nama_pemesan')
+                    ->select('order.*','status_order.nama','users.name as nama_pemesan')
                     ->where('order.status_order_id',2)
                     ->get();
         $data = array(
@@ -68,7 +68,7 @@ class TransaksiController extends Controller
         $order = DB::table('order')
                     ->join('status_order','status_order.id','=','order.status_order_id')
                     ->join('users','users.id','=','order.user_id')
-                    ->select('order.*','status_order.name','users.name as nama_pemesan')
+                    ->select('order.*','status_order.nama','users.name as nama_pemesan')
                     ->where('order.status_order_id',3)
                     ->get();
         $data = array(
@@ -84,7 +84,7 @@ class TransaksiController extends Controller
         $order = DB::table('order')
                     ->join('status_order','status_order.id','=','order.status_order_id')
                     ->join('users','users.id','=','order.user_id')
-                    ->select('order.*','status_order.name','users.name as nama_pemesan')
+                    ->select('order.*','status_order.nama','users.name as nama_pemesan')
                     ->where('order.status_order_id',5)
                     ->get();
         $data = array(
@@ -100,7 +100,7 @@ class TransaksiController extends Controller
         $order = DB::table('order')
                     ->join('status_order','status_order.id','=','order.status_order_id')
                     ->join('users','users.id','=','order.user_id')
-                    ->select('order.*','status_order.name','users.name as nama_pemesan')
+                    ->select('order.*','status_order.nama','users.name as nama_pemesan')
                     ->where('order.status_order_id',6)
                     ->get();
         $data = array(
@@ -116,7 +116,7 @@ class TransaksiController extends Controller
         $order = DB::table('order')
                     ->join('status_order','status_order.id','=','order.status_order_id')
                     ->join('users','users.id','=','order.user_id')
-                    ->select('order.*','status_order.name','users.name as nama_pemesan')
+                    ->select('order.*','status_order.nama','users.name as nama_pemesan')
                     ->where('order.status_order_id',4)
                     ->get();
         $data = array(
@@ -135,11 +135,11 @@ class TransaksiController extends Controller
 
         $kurangistok = DB::table('detail_order')->where('order_id',$id)->get();
         foreach($kurangistok as $kurang){
-            $ambilproduk = DB::table('products')->where('id',$kurang->product_id)->first();
-            $ubahstok = $ambilproduk->stok - $kurang->qty;
+            $ambilproduk = DB::table('produk')->where('id',$kurang->produk_id)->first();
+            $ubahstok = $ambilproduk->stok - $kurang->jumlah;
 
-            $update = DB::table('products')
-                    ->where('id',$kurang->product_id)
+            $update = DB::table('produk')
+                    ->where('id',$kurang->produk_id)
                     ->update([
                         'stok' => $ubahstok
                     ]);

@@ -128,7 +128,7 @@
                           <tr>
                             <th width="5%">No</th>
                             <th>Nama Produk</th>
-                            <th>QTY</th>
+                            <th>jumlah</th>
                             <th>Total Harga</th>
                           </tr>
                         </thead>
@@ -138,8 +138,8 @@
                             <tr>
                                 <td>{{ $no++ }}</td>
                                 <td>{{ $dt->nama_produk }}</td>
-                                <td>{{ $dt->qty }}</td>
-                                <td>{{ $dt->qty * $dt->price }}</td>
+                                <td>{{ $dt->jumlah }}</td>
+                                <td>{{ $dt->jumlah * $dt->harga }}</td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -152,5 +152,5 @@
               </div>
             </div>
           </div>
-          
+
 @endsection

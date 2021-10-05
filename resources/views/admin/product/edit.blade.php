@@ -32,13 +32,13 @@
                                 @csrf
                                 <div class="form-group">
                                 <label for="exampleInputUsername1">Nama Produk</label>
-                                <input required type="text" class="form-control" name="name" value="{{ $product->name }}">
+                                <input required type="text" class="form-control" name="name" value="{{ $product->nama }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect2">Pilih Kategori</label>
                                     <select class="form-control" name="categories_id" id="exampleFormControlSelect2">
                                     @foreach($categories as $categorie)
-                                        <option value="{{ $categorie->id }}" <?php if($product->categories_id == $categorie->id){ echo 'selected';} ?>>{{ $categorie->name }}</option>
+                                        <option value="{{ $categorie->id }}" <?php if($product->kategori_id == $categorie->id){ echo 'selected';} ?>>{{ $categorie->nama }}</option>
                                     @endforeach
                                     </select>
                                 </div>
@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="form-group">
                                 <label for="exampleInputUsername1">Harga</label>
-                                <input required type="number" class="form-control" name="price" value="{{ $product->price}}">
+                                <input required type="number" class="form-control" name="price" value="{{ $product->harga}}">
                                 </div>
                                 <div class="form-group">
                                 <label for="exampleInputUsername1">Stok</label>
@@ -61,7 +61,7 @@
                                 </div>
                                 <div class="form-group">
                                 <label for="">Deskripsi</label>
-                                <textarea name="description" id="" cols="30" rows="10" class="form-control" required>{{ $product->description }}</textarea>
+                                <textarea name="description" id="" cols="30" rows="10" class="form-control" required>{{ $product->deskripsi }}</textarea>
                                 </div>
                                 <div class="text-right">
                                     <button type="submit" class="btn btn-success text-right">Simpan</button>
@@ -74,5 +74,5 @@
               </div>
             </div>
           </div>
-          
+
 @endsection

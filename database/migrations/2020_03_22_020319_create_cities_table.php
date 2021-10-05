@@ -13,11 +13,11 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('kota', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('province_id');
-            $table->unsignedBigInteger('city_id');
-            $table->string('title');
+            $table->unsignedBigInteger('provinsi_id');
+            $table->unsignedBigInteger('kota_id');
+            $table->string('nama');
             $table->timestamps();
         });
     }

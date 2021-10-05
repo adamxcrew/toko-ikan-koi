@@ -14,9 +14,9 @@ class PelangganController extends Controller
         $data = array(
             'pelanggan' => DB::table('users')
                         ->join('alamat','alamat.user_id','=','users.id')
-                        ->join('cities','cities.city_id','=','alamat.cities_id')
-                        ->join('provinces','provinces.province_id','=','cities.province_id')
-                        ->select('users.*','alamat.detail','cities.title as kota','provinces.title as prov')
+                        ->join('kota','kota.kota_id','=','alamat.kota_id')
+                        ->join('provinsi','provinsi.provinsi_id','=','kota.provinsi_id')
+                        ->select('users.*','alamat.detail','kota.nama as kota','provinsi.nama as prov')
                         ->where('users.role','=','customer')->get()
         );
         return view('admin.pelanggan.index',$data);

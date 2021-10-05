@@ -15,7 +15,7 @@ class CreateAlamatTables extends Migration
     {
         Schema::create('alamat', function (Blueprint $table) {
             $table->id();
-            $table->integer('cities_id');
+            $table->integer('kota_id');
             $table->string('detail');
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
             $table->timestamps();

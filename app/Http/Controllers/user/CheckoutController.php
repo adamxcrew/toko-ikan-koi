@@ -15,20 +15,20 @@ class CheckoutController extends Controller
         //ambil produk apa saja yang akan dibeli user dari table keranjang
         $keranjangs = DB::table('keranjang')
                             ->join('users','users.id','=','keranjang.user_id')
-                            ->join('products','products.id','=','keranjang.products_id')
-                            ->select('products.name as nama_produk','products.image','products.weigth','users.name','keranjang.*','products.price')
+                            ->join('produk','produk.id','=','keranjang.produk_id')
+                            ->select('produk.nama as nama_produk','produk.gambar','produk.weigth','users.name','keranjang.*','produk.harga')
                             ->where('keranjang.user_id','=',$id_user)
                             ->get();
 
         //lalu hitung jumlah berat total dari semua produk yang akan di beli
         $berattotal = 0;
         foreach($keranjangs as $k){
-            $berat = $k->weigth * $k->qty;
+            $berat = $k->weigth * $k->jumlah;
             $berattotal = $berattotal + $berat;
         }
         //lalu ambil id kota si pelanngan
         $city = DB::table('alamat')->where('user_id',$id_user)->get();
-        $city_destination =  $city[0]->cities_id;
+        $city_destination =  $city[0]->kota_id;
         //ambil id kota toko
         $alamat_toko = DB::table('alamat_toko')->first();
 
@@ -42,15 +42,15 @@ class CheckoutController extends Controller
         // dd($cost);
         //ambil hasil nya
         $ongkir =  $cost[0]['costs'][0]['cost'][0]['value'];
-        
+
         //lalu ambil alamat user untuk ditampilkan di view
         $alamat_user = DB::table('alamat')
-        ->join('cities','cities.city_id','=','alamat.cities_id')
-        ->join('provinces','provinces.province_id','=','cities.province_id')
-        ->select('alamat.*','cities.title as kota','provinces.title as prov')
+        ->join('kota','kota.kota_id','=','alamat.kota_id')
+        ->join('provinsi','provinsi.provinsi_id','=','kota.provinsi_id')
+        ->select('alamat.*','kota.nama as kota','provinsi.nama as prov')
         ->where('alamat.user_id',$id_user)
-        ->first();    
-        
+        ->first();
+
         //buat kode invoice sesua tanggalbulantahun dan jam
         $data = [
             'invoice' => 'ALV'.Date('Ymdhi'),

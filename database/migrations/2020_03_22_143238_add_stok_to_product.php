@@ -13,7 +13,7 @@ class AddStokToProduct extends Migration
      */
     public function up()
     {
-        Schema::table('products', function (Blueprint $table) {
+        Schema::table('produk', function (Blueprint $table) {
             $table->integer('stok');
         });
     }

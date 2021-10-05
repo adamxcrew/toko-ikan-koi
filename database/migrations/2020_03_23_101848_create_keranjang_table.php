@@ -16,8 +16,8 @@ class CreateKeranjangTable extends Migration
         Schema::create('keranjang', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->unsignedBigInteger('products_id');
-            $table->integer('qty');
+            $table->unsignedBigInteger('produk_id');
+            $table->integer('jumlah');
             $table->timestamps();
         });
     }

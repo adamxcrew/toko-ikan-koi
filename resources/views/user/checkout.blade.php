@@ -28,9 +28,9 @@
                       <?php $subtotal=0;?>
                       @foreach($keranjangs as $keranjang)
                       <tr>
-                        <td>{{ $keranjang->nama_produk }} <strong class="mx-2">x</strong> {{ $keranjang->qty }}</td>
+                        <td>{{ $keranjang->nama_produk }} <strong class="mx-2">x</strong> {{ $keranjang->jumlah }}</td>
                         <?php
-                          $total = $keranjang->price * $keranjang->qty;
+                          $total = $keranjang->harga * $keranjang->jumlah;
                           $subtotal = $subtotal + $total;
                       ?>
                         <td>Rp. {{ number_format($total,2,',','.') }}</td>
@@ -47,7 +47,7 @@
                       <tr>
                         <td class="text-black font-weight-bold"><strong>Jumlah Pembayaran</strong></td>
                         <td class="text-black font-weight-bold">
-                        <?php $alltotal = $subtotal + $ongkir; ?>  
+                        <?php $alltotal = $subtotal + $ongkir; ?>
                         <strong>Rp. {{ number_format($alltotal,2,',','.') }}</strong></td>
                       </tr>
                       <tr>
@@ -75,7 +75,7 @@
                     </select>
                     <small>Jika memilih cod maka akan dikenakan biaya tambahan sebesar Rp. 10.000,00</small>
                   </div>
-                 
+
 
                   <div class="form-group">
                     <button class="btn btn-primary btn-lg py-3 btn-block" type="submit">Pesan Sekarang</button>

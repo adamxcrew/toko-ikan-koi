@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Alamat extends Model
 {
     protected $table = 'alamat';
-    
-    protected $fillable = ['user_id','cities_id','detail'];
+
+    protected $fillable = ['user_id','kota_id','detail'];
 }

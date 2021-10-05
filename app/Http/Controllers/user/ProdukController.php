@@ -13,15 +13,17 @@ class ProdukController extends Controller
     {
         //menampilkan data produk yang dijoin dengan table kategori
         //kemudian dikasih paginasi 9 data per halaman nya
-        $kat = DB::table('categories')
-                ->join('products','products.categories_id','=','categories.id')
-                ->select(DB::raw('count(products.categories_id) as jumlah, categories.*'))
-                ->groupBy('categories.id')
+        $kat = DB::table('kategori')
+                ->join('produk','produk.kategori_id','=','kategori.id')
+                ->select(DB::raw('count(produk.kategori_id) as jumlah, kategori.*'))
+                ->groupBy('kategori.id')
                 ->get();
         $data = array(
             'produks' => Product::paginate(9),
             'categories' => $kat
         );
+
+        // dd($kat);
         return view('user.produk',$data);
     }
     public function detail($id)
@@ -37,7 +39,7 @@ class ProdukController extends Controller
     {
         //mencari produk yang dicari user
         $prod  = Product::where('name','like','%' . $request->cari. '%')->paginate(9);
-        $total = Product::where('name','like','%' . $request->cari. '%')->count(); 
+        $total = Product::where('name','like','%' . $request->cari. '%')->count();
         $data  = array(
             'produks' => $prod,
             'cari' => $request->cari,

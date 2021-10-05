@@ -22,7 +22,7 @@
                         <select name="province_id" id="province_id" class="form-control">
                         <option value="">Pilih Provinsi</option>
                         @foreach($province as $provinsi)
-                            <option value="{{ $provinsi->province_id }}">{{ $provinsi->title }}</option>
+                            <option value="{{ $provinsi->provinsi_id }}">{{ $provinsi->nama }}</option>
                         @endforeach
                         </select>
                         </div>
@@ -60,7 +60,7 @@ var toHtml = (tag, value) => {
      $('#province_id').on('change',function(){
      var id = $('#province_id').val();
      var url = window.location.href;
-     var urlNya = url.substring(0, url.lastIndexOf('/alamat/'));   
+     var urlNya = url.substring(0, url.lastIndexOf('/alamat/'));
      $.ajax({
          type:'GET',
          url:urlNya + '/getcity/' + id,
@@ -70,7 +70,7 @@ var toHtml = (tag, value) => {
             if(data.length > 0) {
 			var i = 0;
 			for(i = 0; i < data.length; i++) {
-				op += `<option value="${data[i].city_id}">${data[i].title}</option>`
+				op += `<option value="${data[i].kota_id}">${data[i].nama}</option>`
 			}
 		    }
             toHtml('[name="cities_id"]', op);

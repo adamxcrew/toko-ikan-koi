@@ -33,7 +33,7 @@
                 <tr>
                     <td>{{ $o->invoice }}</td>
                     <td>{{ $o->subtotal + $o->biaya_cod }}</td>
-                    <td>{{ $o->name }}</td>
+                    <td>{{ $o->nama }}</td>
                     <td>
                     <a href="{{ route('user.order.pembayaran',['id' => $o->id]) }}" class="btn btn-success">Bayar</a>
                     <a href="{{ route('user.order.pesanandibatalkan',['id' => $o->id]) }}" onclick="return confirm('Yakin ingin membatalkan pesanan')" class="btn btn-danger">Batalkan</a>
@@ -44,7 +44,7 @@
             </table>
             </div>
            </div>
-        
+
     </div>
 
     </div>
@@ -72,10 +72,10 @@
                     <td>{{ $o->invoice }}</td>
                     <td>{{ $o->subtotal + $o->biaya_cod }}</td>
                     <td>
-                        @if($o->name == 'Perlu Di Cek')
+                        @if($o->nama == 'Perlu Di Cek')
                         Sedang Di Cek
                         @else
-                        {{ $o->name }}
+                        {{ $o->nama }}
                         @endif
                     </td>
                     <td>
@@ -85,7 +85,7 @@
                 @endforeach
             </tbody>
             </table>
-        
+
     </div>
 
     <div class="container">
@@ -111,7 +111,7 @@
                 <tr>
                     <td>{{ $o->invoice }}</td>
                     <td>{{ $o->subtotal + $o->biaya_cod }}</td>
-                    <td>{{ $o->name }}</td>
+                    <td>{{ $o->nama }}</td>
                     <td>
                     <a href="{{ route('user.order.detail',['id' => $o->id]) }}" class="btn btn-success">Detail</a>
                     </td>
@@ -120,7 +120,7 @@
             </tbody>
             </table>
             </div>
-        
+
     </div>
 
     </div>
